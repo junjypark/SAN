@@ -1,8 +1,7 @@
 harmonization_step<-function(kernel=NULL,sigma,tau,phi.hat,data.mat,count.batches,dis,batches.f,batch.id,method='None',parallel=FALSE,ncores=2){
-  if (kernel=='squared exponential'){ 
-    corMat.base=exp(-dis^2)}else if (kernel=="exponential"){
-      corMat.base=exp(-dis)
-    }else if (kernel=='mixture'){
+  if (kernel=='squared exponential'){ corMat.base=exp(-dis^2) }
+  else if (kernel=="exponential"){corMat.base=exp(-dis)}
+  else if (kernel=='mixture'){
       corMat.base1=exp(-dis)
       corMat.base2=exp(-dis^2)
     }
@@ -31,9 +30,7 @@ harmonization_step<-function(kernel=NULL,sigma,tau,phi.hat,data.mat,count.batche
         gamma_bat=sigma[j]*corMat.base^phi.hat%*%Sigma_inv_bat%*%data.mat[,batches.f==batch.id[j]]
         
         list(delta_bat=delta_bat, gamma_bat= gamma_bat)
-        
       }
-      
       stopCluster(cl)
       
       for (j in 1:n.batches){
@@ -58,8 +55,6 @@ harmonization_step<-function(kernel=NULL,sigma,tau,phi.hat,data.mat,count.batche
         delta_h[,batches.f==batch.id[j]]= delta_bat[[j]]/sqrt(tau[j])* sqrt(tau_h)
         gamma_h[,batches.f==batch.id[j]]= gamma_bat[[j]]/sqrt(sigma[j])* sqrt(sigma_h)
       }
-      
-      
     }
     
     
@@ -67,7 +62,6 @@ harmonization_step<-function(kernel=NULL,sigma,tau,phi.hat,data.mat,count.batche
       delta_h<-relief(dat=delta, batch=batches.f, mod =NULL,max.iter=50)$dat.relief
     }else if(method=="CovBat"){
       delta_h<-covbat(dat=delta, bat=batches.f, mod =NULL)$dat.cov
-      
     }
     
   }else if (kernel=='mixture'){
@@ -110,7 +104,6 @@ harmonization_step<-function(kernel=NULL,sigma,tau,phi.hat,data.mat,count.batche
         delta_h[,batches.f==batch.id[j]]= results[[j]]$delta_bat/sqrt(tau[j])* sqrt(tau_h)
         gamma1_h[,batches.f==batch.id[j]]= results[[j]]$gamma1_bat/sqrt(sigma[j,1])* sqrt(sigma1_h)
         gamma2_h[,batches.f==batch.id[j]]= results[[j]]$gamma2_bat/sqrt(sigma[j,2])* sqrt(sigma2_h)
-        
       }
     }else{
       for (j in 1:n.batches){
@@ -128,7 +121,6 @@ harmonization_step<-function(kernel=NULL,sigma,tau,phi.hat,data.mat,count.batche
         delta_h[,batches.f==batch.id[j]]= delta_bat[[j]]/sqrt(tau[j])* sqrt(tau_h)
         gamma1_h[,batches.f==batch.id[j]]= gamma1_bat[[j]]/sqrt(sigma[j,1])* sqrt(sigma1_h)
         gamma2_h[,batches.f==batch.id[j]]= gamma2_bat[[j]]/sqrt(sigma[j,2])* sqrt(sigma2_h)
-        
       }
     }
     gamma_h<-list(gamma1_h,gamma2_h)
@@ -137,9 +129,7 @@ harmonization_step<-function(kernel=NULL,sigma,tau,phi.hat,data.mat,count.batche
       delta_h<-relief(dat=delta, batch=batches.f, mod =NULL,max.iter=50)$dat.relief
     }else if(method=="CovBat"){
       delta_h<-covbat(dat=delta, bat=batches.f, mod =NULL)$dat.cov
-      
     }
-    
   }
   return(list(delta=delta,delta_h=delta_h,gamma=gamma,gamma_h=gamma_h,tau_h=tau_h,sigma_h=sigma_h))
 }
