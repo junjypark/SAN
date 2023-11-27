@@ -1,11 +1,12 @@
-local_reg<-function(data.mat,range=5,dis,batches,mod,standardize=TRUE,parallel=FALSE,ncores=2){
+local_reg<-function(data.mat,range=5,dis,batches,mod,standardize=TRUE){
   n=ncol(data.mat);p=nrow(data.mat)
   if(is.null(mod)){
     covariates=rep(1,n)
     q=0
   }else{
     covariates=mod[,-1]
-    q=ncol(covariates)}
+    q=ncol(covariates)
+    }
   
   batches.f=as.factor(batches)
   batch.id=unique(batches); n.batches=length(batch.id)
@@ -30,13 +31,9 @@ local_reg<-function(data.mat,range=5,dis,batches,mod,standardize=TRUE,parallel=F
     
     global.int[i,]<- global_reg$coefficients[1]
     res_global[i,]<-residuals(global_reg)
-    
-    
   }
   
-  
   for (i in 1:p){
-    #idx=order(dis[i,])[1:neighbors]
     num_neighbors=sum(dis[i,]<=range)
     idx=order(dis[i,])[1:num_neighbors]
     
@@ -50,7 +47,6 @@ local_reg<-function(data.mat,range=5,dis,batches,mod,standardize=TRUE,parallel=F
     sigma.mat[i,]<-S[batches.f]
     data.reg[i,]=data[1,]-scanner.mean[i,]
     data.std[i,]=(data[1,]-scanner.mean[i,])/sigma.mat[i,]
-    
   }
   
   if (standardize==FALSE){
