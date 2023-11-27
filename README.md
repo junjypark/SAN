@@ -35,7 +35,7 @@ To install the latest development builds directly from GitHub, please run the fo
 ```R
 if (!require("devtools"))
   install.packages("devtools")
-devtools::install_github("junjypark/RELIEF")
+devtools::install_github("junjypark/SAN")
 ```
 
 <div id='id-distance'/>
@@ -50,7 +50,7 @@ devtools::install_github("junjypark/RELIEF")
 
 * `dat`: a (p x n) data matrix, where p is the number of features and n is the number of subjects (required)
 * `batch`: Batch variable for the scanner id (required)
-* `mod`: a (n x q) matrix containing biological covariates (optional). This can be obtained by using `model.matrix()` function in R. However, when you use `mod` in RELIEF, ensure your covariate of interest (for hypothesis testing) is excluded. In practice, RELIEF preserves covariate effects well even though it is not specified as an input.
+* `mod`: a (n x q) matrix containing biological covariates (optional). This can be obtained by using `model.matrix()` function in R. However, when you use `mod` in SAN, ensure your covariate of interest (for hypothesis testing) is excluded. In practice, SAN preserves covariate effects well even though it is not specified as an input.
 * `distMat`: a (p x p) matrix containing pairwise distance information. The diagonal entrys should have 0 values.
 
 
