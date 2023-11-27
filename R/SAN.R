@@ -31,11 +31,8 @@ SAN<-function(dat, batch=NULL, distMat=NULL, mod=NULL,
   batch.covariates=model.matrix(~batch.f-1)
   count.batch=sapply(1:n.batch,function(m) sum(batch.f==batch.id[m]))
   
-  if (stage1=='combat'){
-    stage1_result=local_combat(data.mat=dat,range=range,dis=distMat,batches=batch,mod=mod,standardize = standardize,parallel=parallel,ncores=ncores)
-  }else if (stage1=='collapsing'){
-    stage1_result=local_reg(data.mat=dat,range=range,dis=distMat,batches=batch,mod=mod,standardize = standardize)
-  }
+  if (stage1=='combat'){ stage1_result=local_combat(data.mat=dat,range=range,dis=distMat,batches=batch,mod=mod,standardize = standardize) }
+  else if (stage1=='collapsing'){ stage1_result=local_reg(data.mat=dat,range=range,dis=distMat,batches=batch,mod=mod,standardize = standardize) }
   
   data.mat=stage1_result$data.mat
   
