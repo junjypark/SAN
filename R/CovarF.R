@@ -3,15 +3,16 @@
 #' @param data.mat Numeric matrix with imaging features as rows,
 #'  and subjects as columns.
 #' @param range  Radius for the local neighbors; default 5.
-#' @param dis Symmetric matrix indicating distance between imaging features.
+#' @param distMat Symmetric matrix indicating distance between imaging features.
 #' @param batch Numeric or character vector specifying the batch/scanner 
 #'     variable needed for harmonization. 
 #' @param mod Optional model matrix for outcome of interest and 
 #'     other covariates besides batch/scanner.
-#' @param cov_true Positive definite matrix for shared covariances across batches/scanners.
+#' @param cov_true Optional shared covariance matrix across batches/scanners. 
+#' If not specified, this covariance matrix is estimated from pooled \code{data.mat}.
 #' @return A vector of CovarF statistics.
 
-CovarF<-function(data.mat, batch, distMat, mod, range=5,cov_true){
+CovarF<-function(data.mat, batch, distMat, mod, range=5,cov_true=NULL){
   n=ncol(data.mat)
   p=nrow(data.mat)
   F_stat=vector(length = p)
@@ -20,9 +21,14 @@ CovarF<-function(data.mat, batch, distMat, mod, range=5,cov_true){
   n.batch=length(batch.id)
   count.batch=sapply(1:n.batch,function(m) sum(batch.f==batch.id[m]))
   
+  if (is.null(cov_true)){
+    res_data<-apply(data.mat,1,function(x) lm(x~mod+batch)$residuals)
+    cov_true=cov(res_data)
+  }
+  
   for (i in 1:p){
-    num_neighbors=sum(dis[i,]<=range)
-    idx=order(dis[i,])[1:num_neighbors]
+    num_neighbors=sum(distMat[i,]<=range)
+    idx=order(distMat[i,])[1:num_neighbors]
     data=data.mat[idx,]
     cov_local=cov_true[idx,idx]
     res_data<-apply(t(data),2,function(x) lm(x~mod+batch.f)$residuals)
@@ -43,4 +49,3 @@ CovarF<-function(data.mat, batch, distMat, mod, range=5,cov_true){
   }
   return(F_stat)
 }
-
