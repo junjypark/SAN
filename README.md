@@ -61,7 +61,7 @@ CovarF statistic can be used to quantify local covariance heterogeneity of the r
 
 
 <figure>
-<img src="readme_iamges/CovarF_map.jpg" style="width:70.0%"
+<img src="readme_images/CovarF_map.jpg" style="width:70.0%"
 alt="Covariance F map" />
 <figcaption aria-hidden="true"> Covariance F map </figcaption>
 </figure>
