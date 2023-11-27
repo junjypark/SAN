@@ -1,0 +1,2 @@
+importFrom(doParallel)
+export(SAN)

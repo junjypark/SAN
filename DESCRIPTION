@@ -1,0 +1,11 @@
+Package: SAN
+Type: Package
+Title: SAN - mitigating spatial covariance heterogeneity in multi-site neuroimaging studies
+Version: 0.1.0
+Author: Rongqian Zhang
+Maintainer: Jun Young Park <junjy.park@utronto.ca>
+Description: TBD
+License: GPL-3
+Encoding: UTF-8
+Depends: neuroCombat, CovBat, RELIEF, doParallel, foreach, parallel
+ 
