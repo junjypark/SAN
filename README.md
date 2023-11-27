@@ -1,0 +1,2 @@
+# SAN
+Spatial autocorrelation normalization
