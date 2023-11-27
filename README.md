@@ -46,7 +46,7 @@ devtools::install_github("junjypark/RELIEF")
 
 We recommend using geodesic distance for mesh surfaces. You may use [Python](https://pypi.org/project/pygeodesic/) or [C++](https://code.google.com/archive/p/geodesic/wikis/ExactGeodesic.wiki) to obtain a pairwise geodesic distance matrix.
 
-It requires the extraction of `vertices` and `faces` matrices. The `vertices` matrix contains the 3D coordinate for each vertex, and each row of the `faces` matrix contains the indices of three vertices that construct a triangle in the mesh surface. In Freesurfer, the surface file (e.g. `lh.pial` (recommended) or `lh.inflated`) can be used to extract vertices and faces (see `read.fs.surface()` in the freesurferformats R package). Once you load `vertices` and `faces', the following manipulation is necessary due to the difference between R and Python.
+It requires the extraction of `vertices` and `faces` matrices. The `vertices` matrix contains the 3D coordinate for each vertex, and each row of the `faces` matrix contains the indices of three vertices that construct a triangle in the mesh surface. In Freesurfer, the surface file (e.g. `lh.pial` (recommended) or `lh.inflated`) can be used to extract vertices and faces (see `read.fs.surface()` in the freesurferformats R package). Once you load `vertices` and `faces`, the following manipulation is necessary due to the difference between R and Python.
 
 ```R
 surf$faces = surf$faces-1
@@ -56,6 +56,9 @@ surf$faces = surf$faces-1
 <div id='id-covarF'/>
 
 ---
+
+### Covariance F statistic
+
 
 CovarF statistic can be used to quantify local covariance heterogeneity of the raw imaging data. It can be implemented using `covarF()` function provided in this package.
 
