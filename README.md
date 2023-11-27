@@ -12,9 +12,9 @@ R package to apply SAN to harmonize heterogeneous spatial covariances in multi-s
 
 1. [Background](#id-background)
 2. [Installation](#id-installation)
-3. [Distance matrix](#id-distance)
-4. [CovarF](#id-covarF)
-5. [Usage](#id-san)
+3. [Usage](#id-san)
+4. [Distance matrix](#id-distance)
+5. [CovarF](#id-covarF)
 
 ---
 
@@ -39,6 +39,27 @@ devtools::install_github("junjypark/RELIEF")
 ```
 
 <div id='id-distance'/>
+
+<div id='id-san'/>
+
+---
+
+### Usage
+
+`SAN()` is the main function that takes (almost)  the same input names as [neuroCombat](https://github.com/Jfortin1/neuroCombat_Rpackage). Specifically, the following need to be provided.
+
+* `dat`: a (p x n) data matrix, where p is the number of features and n is the number of subjects (required)
+* `batch`: Batch variable for the scanner id (required)
+* `mod`: a (n x q) matrix containing biological covariates (optional). This can be obtained by using `model.matrix()` function in R. However, when you use `mod` in RELIEF, ensure your covariate of interest (for hypothesis testing) is excluded. In practice, RELIEF preserves covariate effects well even though it is not specified as an input.
+* `distMat`: a (p x p) matrix containing pairwise distance information. The diagonal entrys should have 0 values.
+
+
+
+Now, the `SAN` can be applied to obtain the harmonized data.
+
+```R
+fit = SAN(dat=dat, batch=batch, mod=mod, distMat=distMat)
+``` 
 
 ---
 
@@ -70,25 +91,4 @@ alt="Covariance F map" />
 </figure>
 
 
-
-<div id='id-san'/>
-
----
-
-### Usage
-
-`SAN()` is the main function that takes (almost)  the same input names as [neuroCombat](https://github.com/Jfortin1/neuroCombat_Rpackage). Specifically, the following need to be provided.
-
-* `dat`: a (p x n) data matrix, where p is the number of features and n is the number of subjects (required)
-* `batch`: Batch variable for the scanner id (required)
-* `mod`: a (n x q) matrix containing biological covariates (optional). This can be obtained by using `model.matrix()` function in R. However, when you use `mod` in RELIEF, ensure your covariate of interest (for hypothesis testing) is excluded. In practice, RELIEF preserves covariate effects well even though it is not specified as an input.
-* `distMat`: a (p x p) matrix containing pairwise distance information. The diagonal entrys should have 0 values.
-
-
-
-Now, the `SAN` can be applied to obtain the harmonized data.
-
-```R
-fit = SAN(dat=dat, batch=batch, mod=mod, distMat=distMat)
-``` 
 
