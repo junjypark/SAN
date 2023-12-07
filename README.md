@@ -6,7 +6,7 @@ R package to apply SAN to harmonize heterogeneous spatial covariances in multi-s
 
 ### References
 
-> Zhang, R., Chen, L., Oliver, L. D., Voineskos, A. N., Park, J. Y. (2023+). SAN: mitigating spatial covariance heterogeneity in cortical thickness data collected from multiple scanners or sites.
+> Zhang, R., Chen, L., Oliver, L. D., Voineskos, A. N., Park, J. Y. (2023+). SAN: mitigating spatial covariance heterogeneity in cortical thickness data collected from multiple scanners or sites. [link](https://doi.org/10.1101/2023.12.04.569619)
 
 ## Contents
 
