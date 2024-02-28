@@ -81,7 +81,7 @@ surf$faces = surf$faces-1
 ### CASH score
 
 
-CASH score can be used to quantify local covariance heterogeneity of the raw imaging data. It can be implemented using `covarF()` function provided in this package.
+CASH score can be used to quantify local covariance heterogeneity of the raw imaging data. It can be implemented using `CASH()` function provided in this package.
 
 
 <figure>
