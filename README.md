@@ -14,7 +14,7 @@ R package to apply SAN to harmonize heterogeneous spatial covariances in multi-s
 2. [Installation](#id-installation)
 3. [Usage](#id-san)
 4. [Distance matrix](#id-distance)
-5. [CovarF](#id-covarF)
+5. [CASH score](#id-cash)
 
 ---
 
@@ -74,20 +74,20 @@ surf$faces = surf$faces-1
 ```
 
 
-<div id='id-covarF'/>
+<div id='id-cash'/>
 
 ---
 
-### Covariance F statistic
+### CASH score
 
 
-CovarF statistic can be used to quantify local covariance heterogeneity of the raw imaging data. It can be implemented using `covarF()` function provided in this package.
+CASH score can be used to quantify local covariance heterogeneity of the raw imaging data. It can be implemented using `covarF()` function provided in this package.
 
 
 <figure>
-<img src="readme_images/CovarF_map.jpg" style="width:70.0%"
-alt="Covariance F map" />
-<figcaption aria-hidden="true"> Covariance F map </figcaption>
+<img src="readme_images/CASH_map.jpg" style="width:70.0%"
+alt="CASH score brain map" />
+<figcaption aria-hidden="true"> CASH score brain map </figcaption>
 </figure>
 
 

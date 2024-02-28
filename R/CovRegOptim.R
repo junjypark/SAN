@@ -1,3 +1,10 @@
+#' @title Solving covariance regression for Stage 2
+#' @description Helper functions to perform SAN harmonization.
+#' 
+
+
+### exponential/squared exponential
+
 CovRegOptim.1=function(phi, epsilon, corMat_base){
   p=nrow(epsilon[[1]])
   nbatch=length(epsilon)
